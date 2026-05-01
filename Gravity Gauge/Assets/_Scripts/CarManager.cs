@@ -207,6 +207,7 @@ public class CarManager : MonoBehaviour
         if (!inHitstun)
         {
             health--;
+            gravSwapTimer = 0;
 
             if (health > 0)
             {
