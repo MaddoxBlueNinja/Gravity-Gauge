@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CarManager : MonoBehaviour
 {
-    public static float speedZ;
+    public static float speedZ = 0;
     public float accelZ;
     public float decelZ;
     public static int accelZAim;
@@ -17,16 +17,16 @@ public class CarManager : MonoBehaviour
     public float gravJumpForce;
     int gravAim = -1;
     public float gravSwapCD;
-    public static float gravSwapTimer;
+    public static float gravSwapTimer = 0;
 
-    public static float health;
-    public static float minSpeed;
+    public static float health = 3;
+    public static float minSpeed = 3;
 
     bool onLeftWall = false;
     bool onRightWall = false;
     void Start()
     {
-        gravSwapTimer = 0;
+
     }
 
     void Update()

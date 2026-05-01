@@ -1,35 +1,45 @@
+﻿using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject SpeedUpUI;
-    UnityEngine.Color colorSpUpUI;
-    public float alphaSpUpUI;
+    public GameObject speedUpUI;
+    public GameObject slowDownUI;
+    public GameObject healthUI;
 
-    public GameObject SlowDownUI;
-    UnityEngine.Color colorSlDoUI;
-    public float alphaSlDoUI;
+    Color colorSpUpUI;
+    float alphaSpUpUI;
+
+    Color colorSlDoUI;
+    float alphaSlDoUI;
+
+    TMPro.TextMeshProUGUI healthText;
+    Color colorHeTe;
 
     public float alphaChangeSpeed;
 
     private void Start()
     {
-        colorSpUpUI = SpeedUpUI.GetComponent<Image>().color;
+        colorSpUpUI = speedUpUI.GetComponent<Image>().color;
         colorSpUpUI.a = 100 + alphaSpUpUI;
-        SpeedUpUI.GetComponent<Image>().color = colorSpUpUI;
+        speedUpUI.GetComponent<Image>().color = colorSpUpUI;
 
-        colorSlDoUI = SlowDownUI.GetComponent<Image>().color;
+        colorSlDoUI = slowDownUI.GetComponent<Image>().color;
         colorSlDoUI.a = 100 + alphaSlDoUI;
-        SlowDownUI.GetComponent<Image>().color = colorSlDoUI;
+        slowDownUI.GetComponent<Image>().color = colorSlDoUI;
+
+        healthText = healthUI.GetComponent<TMPro.TextMeshProUGUI>();
+        colorHeTe = healthUI.GetComponent<TMPro.TextMeshProUGUI>().color;
     }
     void FixedUpdate()
     {
-        UpdateSpeedUp();
-        UpdateSlowDown();
+        SpeedUpUpdate();
+        SlowDownUpdate();
+        HealthUpdate();
     }
 
-    void UpdateSpeedUp()
+    void SpeedUpUpdate()
     {
         if (CarManager.accelZAim > 0)
         {
@@ -48,13 +58,13 @@ public class UIManager : MonoBehaviour
         }
 
         colorSpUpUI.a = alphaSpUpUI;
-        SpeedUpUI.GetComponent<Image>().color = colorSpUpUI;
+        speedUpUI.GetComponent<Image>().color = colorSpUpUI;
     }
 
-    void UpdateSlowDown()
+    void SlowDownUpdate()
     {
         colorSpUpUI.a = alphaSpUpUI;
-        SpeedUpUI.GetComponent<Image>().color = colorSpUpUI;
+        speedUpUI.GetComponent<Image>().color = colorSpUpUI;
 
         if (CarManager.accelZAim < 0)
         {
@@ -73,6 +83,20 @@ public class UIManager : MonoBehaviour
         }
 
         colorSlDoUI.a = alphaSlDoUI;
-        SlowDownUI.GetComponent<Image>().color = colorSlDoUI;
+        slowDownUI.GetComponent<Image>().color = colorSlDoUI;
+    }
+
+    void HealthUpdate()
+    {
+        healthText.color = colorHeTe;
+
+        healthText.text = "HP: ";
+
+        healthText.color = Color.red;
+
+        for (int i = 0; i < CarManager.health; i++)
+        {
+            healthText.text += "♥";
+        }
     }
 }
