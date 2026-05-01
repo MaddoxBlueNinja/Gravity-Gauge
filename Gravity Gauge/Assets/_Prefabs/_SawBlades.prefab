@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1372258881425047464}
   m_Layer: 0
-  m_Name: SawBlades
+  m_Name: _SawBlades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

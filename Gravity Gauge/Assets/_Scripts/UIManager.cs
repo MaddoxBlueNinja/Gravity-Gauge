@@ -11,14 +11,16 @@ public class UIManager : MonoBehaviour
     public GameObject gravUI;
 
     Color colorSpUpUI;
-    float alphaSpUpUI;
+    float alphaSpUpUI = 0;
 
     Color colorSlDoUI;
-    float alphaSlDoUI;
+    float alphaSlDoUI = 0;
 
     TMPro.TextMeshProUGUI healthText;
 
     TMPro.TextMeshProUGUI thrillText;
+    Color colorThrillUI;
+    float greenThrillUI = 0;
 
     TMPro.TextMeshProUGUI gravText;
 
@@ -37,6 +39,9 @@ public class UIManager : MonoBehaviour
         healthText = healthUI.GetComponent<TMPro.TextMeshProUGUI>();
 
         thrillText = thrillUI.GetComponent<TMPro.TextMeshProUGUI>();
+        colorThrillUI = thrillUI.GetComponent<TMPro.TextMeshProUGUI>().color;
+        colorThrillUI.g = greenThrillUI;
+        thrillUI.GetComponent<TMPro.TextMeshProUGUI>().color = colorThrillUI;
 
         gravText = gravUI.GetComponent<TMPro.TextMeshProUGUI>();
     }
@@ -114,16 +119,24 @@ public class UIManager : MonoBehaviour
         {
             thrillText.text += "|";
         }
+
+        greenThrillUI = 1 - ((float)CarManager.thrill / 15);
+
+        colorThrillUI.g = greenThrillUI;
+        thrillUI.GetComponent<TMPro.TextMeshProUGUI>().color = colorThrillUI;
     }
     void GravUpdate()
     {
         if (CarManager.gravSwapTimer <= 0)
         {
-            gravText.text = "√";
+            gravText.text = "READY";
+            gravText.color = Color.cyan;
+            //√
         }
         else
         {
             gravText.text = (CarManager.gravSwapTimer / 50).ToString("F2");
+            gravText.color = Color.white;
         }
 
         gravText.text += " :Grav";
