@@ -119,15 +119,11 @@ public class UIManager : MonoBehaviour
     {
         if (CarManager.gravSwapTimer <= 0)
         {
-            gravText.text = "√ :Grav";
-            return;
+            gravText.text = "√";
         }
-
-        gravText.text = "";
-
-        for (int i = 0; i < CarManager.gravSwapTimer / 5; i++)
+        else
         {
-            gravText.text += "|";
+            gravText.text = (CarManager.gravSwapTimer / 50).ToString("F2");
         }
 
         gravText.text += " :Grav";
