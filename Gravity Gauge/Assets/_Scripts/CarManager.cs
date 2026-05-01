@@ -24,6 +24,7 @@ public class CarManager : MonoBehaviour
     public static float health = 3;
 
     public static int thrill = 0;
+    public float minSpeedForThrill;
 
     bool onLeftWall = false;
     bool onRightWall = false;
@@ -46,7 +47,7 @@ public class CarManager : MonoBehaviour
 
         if (inHitstun) return;
 
-        thrill = Mathf.CeilToInt(speedZ * 5);
+        thrill = Mathf.CeilToInt((speedZ - minSpeedForThrill) * 5);
 
         AccelInputZ();
         GravInput();
@@ -207,11 +208,7 @@ public class CarManager : MonoBehaviour
         {
             health--;
 
-            if (health <= 0)
-            {
-                //lose condition
-            }
-            else
+            if (health > 0)
             {
                 inHitstun = true;
                 hitStunTimer = hitStunCD;

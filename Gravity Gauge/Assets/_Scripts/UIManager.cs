@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject slowDownUI;
     public GameObject healthUI;
     public GameObject thrillUI;
+    public GameObject gravUI;
 
     Color colorSpUpUI;
     float alphaSpUpUI;
@@ -18,6 +19,8 @@ public class UIManager : MonoBehaviour
     TMPro.TextMeshProUGUI healthText;
 
     TMPro.TextMeshProUGUI thrillText;
+
+    TMPro.TextMeshProUGUI gravText;
 
     public float alphaChangeSpeed;
 
@@ -34,6 +37,8 @@ public class UIManager : MonoBehaviour
         healthText = healthUI.GetComponent<TMPro.TextMeshProUGUI>();
 
         thrillText = thrillUI.GetComponent<TMPro.TextMeshProUGUI>();
+
+        gravText = gravUI.GetComponent<TMPro.TextMeshProUGUI>();
     }
     void FixedUpdate()
     {
@@ -41,6 +46,7 @@ public class UIManager : MonoBehaviour
         SlowDownUpdate();
         HealthUpdate();
         ThrillUpdate();
+        GravUpdate();
     }
 
     void SpeedUpUpdate()
@@ -108,5 +114,22 @@ public class UIManager : MonoBehaviour
         {
             thrillText.text += "|";
         }
+    }
+    void GravUpdate()
+    {
+        if (CarManager.gravSwapTimer <= 0)
+        {
+            gravText.text = "√ :Grav";
+            return;
+        }
+
+        gravText.text = "";
+
+        for (int i = 0; i < CarManager.gravSwapTimer / 5; i++)
+        {
+            gravText.text += "|";
+        }
+
+        gravText.text += " :Grav";
     }
 }
