@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarMovement : MonoBehaviour
+public class CarManager : MonoBehaviour
 {
-    public float speedZ;
+    public static float speedZ;
     public float accelZ;
     public float decelZ;
-    int accelZAim;
+    public static int accelZAim;
 
     float speedX;
     public float accelX;
@@ -17,10 +17,10 @@ public class CarMovement : MonoBehaviour
     public float gravJumpForce;
     int gravAim = -1;
     public float gravSwapCD;
-    public float gravSwapTimer;
+    public static float gravSwapTimer;
 
-    public float health;
-    public float minSpeed;
+    public static float health;
+    public static float minSpeed;
 
     bool onLeftWall = false;
     bool onRightWall = false;
