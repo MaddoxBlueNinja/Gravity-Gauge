@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class CarManager : MonoBehaviour
 {
+    public GameObject carGraphics;
+
     public static float speedZ = 0;
     public float accelZ;
     public float decelZ;
@@ -24,6 +26,14 @@ public class CarManager : MonoBehaviour
 
     bool onLeftWall = false;
     bool onRightWall = false;
+
+    bool inHitstun = false;
+    public float hitStunCD;
+    float hitStunTimer = 0;
+    public float stunFlashCD;
+    float stunFlashTimer = 0;
+    public float recoilSpeed;
+
     void Start()
     {
 
@@ -31,16 +41,29 @@ public class CarManager : MonoBehaviour
 
     void Update()
     {
-        AccelInput();
+        AccelInputX();
+
+        if (inHitstun) return;
+
+        AccelInputZ();
         GravInput();
     }
 
     void FixedUpdate()
     {
-        SpeedUpdate();
-        GravityUpdate();
-
         if (gravSwapTimer > 0) gravSwapTimer--;
+        if (hitStunTimer > 0) hitStunTimer--;
+
+        SpeedUpdateX();
+
+        if (inHitstun)
+        {
+            Recoil();
+            return;
+        }
+
+        SpeedUpdateZ();
+        GravityUpdate();
     }
 
     void GravInput()
@@ -55,7 +78,7 @@ public class CarManager : MonoBehaviour
         }
     }
 
-    void AccelInput()
+    void AccelInputZ()
     {
         if (Keyboard.current.wKey.isPressed)
         {
@@ -69,7 +92,10 @@ public class CarManager : MonoBehaviour
         {
             accelZAim = 0;
         }
+    }
 
+    void AccelInputX()
+    {
         if (Keyboard.current.dKey.isPressed && !onRightWall)
         {
             accelXAim = 1;
@@ -84,7 +110,7 @@ public class CarManager : MonoBehaviour
         }
     }
 
-    void SpeedUpdate()
+    void SpeedUpdateZ()
     {
         if (accelZAim != 0)
         {
@@ -95,6 +121,13 @@ public class CarManager : MonoBehaviour
             speedZ *= 1 - decelZ;
         }
 
+        Vector3 pos = this.transform.position;
+        pos.z += speedZ;
+        this.transform.position = pos;
+    }
+
+    void SpeedUpdateX()
+    {
         if (accelXAim != 0)
         {
             if (Mathf.Sign(accelXAim) != Mathf.Sign(speedX))
@@ -110,7 +143,6 @@ public class CarManager : MonoBehaviour
         }
 
         Vector3 pos = this.transform.position;
-        pos.z += speedZ;
         pos.x += speedX;
         this.transform.position = pos;
     }
@@ -119,7 +151,33 @@ public class CarManager : MonoBehaviour
     {
         Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
         rb.AddForce(0, gravAmount * gravAim, 0);
-        
+    }
+
+    void Recoil()
+    {
+        if (hitStunTimer <= 0)
+        {
+            inHitstun = false;
+            carGraphics.SetActive(true);
+            return;
+        }
+        else
+        {
+            Vector3 pos = this.transform.position;
+            pos.z -= recoilSpeed;
+            this.transform.position = pos;
+        }
+
+        if (stunFlashTimer <= 0)
+        {
+            carGraphics.SetActive(!carGraphics.activeInHierarchy);
+
+            stunFlashTimer = stunFlashCD;
+        }
+        else
+        {
+            stunFlashTimer--;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -139,6 +197,22 @@ public class CarManager : MonoBehaviour
             accelXAim = 0;
             onLeftWall = true;
             return;
+        }
+
+        // If Collision is NOT a Wall or Road.
+        if (!inHitstun)
+        {
+            health--;
+
+            if (health <= 0)
+            {
+                //lose condition
+            }
+            else
+            {
+                inHitstun = true;
+                hitStunTimer = hitStunCD;
+            }
         }
     }
 

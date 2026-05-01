@@ -15,7 +15,6 @@ public class UIManager : MonoBehaviour
     float alphaSlDoUI;
 
     TMPro.TextMeshProUGUI healthText;
-    Color colorHeTe;
 
     public float alphaChangeSpeed;
 
@@ -30,7 +29,6 @@ public class UIManager : MonoBehaviour
         slowDownUI.GetComponent<Image>().color = colorSlDoUI;
 
         healthText = healthUI.GetComponent<TMPro.TextMeshProUGUI>();
-        colorHeTe = healthUI.GetComponent<TMPro.TextMeshProUGUI>().color;
     }
     void FixedUpdate()
     {
@@ -88,11 +86,7 @@ public class UIManager : MonoBehaviour
 
     void HealthUpdate()
     {
-        healthText.color = colorHeTe;
-
         healthText.text = "HP: ";
-
-        healthText.color = Color.red;
 
         for (int i = 0; i < CarManager.health; i++)
         {
