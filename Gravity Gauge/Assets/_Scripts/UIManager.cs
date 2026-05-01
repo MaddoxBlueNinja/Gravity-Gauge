@@ -4,11 +4,17 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject speedUpUI;
-    public GameObject slowDownUI;
-    public GameObject healthUI;
-    public GameObject thrillUI;
-    public GameObject gravUI;
+    public static GameObject speedUpUI;
+    public static GameObject slowDownUI;
+    public static GameObject healthUI;
+    public static GameObject thrillUI;
+    public static GameObject gravUI;
+
+    public static GameObject winUI;
+    public static GameObject advanceUI;
+
+    public static GameObject loseUI;
+    public static GameObject restartUI;
 
     Color colorSpUpUI;
     float alphaSpUpUI = 0;
@@ -28,6 +34,21 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        speedUpUI = GameObject.Find("Speed Up UI");
+        slowDownUI = GameObject.Find("Slow Down UI");
+        healthUI = GameObject.Find("Health UI");
+        thrillUI = GameObject.Find("Thrill UI");
+        gravUI = GameObject.Find("Grav UI");
+        winUI = GameObject.Find("Win Text");
+        advanceUI = GameObject.Find("Advance Button");
+        loseUI = GameObject.Find("Lose Text");
+        restartUI = GameObject.Find("Restart Button");
+
+        winUI.SetActive(false);
+        advanceUI.SetActive(false);
+        loseUI.SetActive(false);
+        restartUI.SetActive(false);
+
         colorSpUpUI = speedUpUI.GetComponent<Image>().color;
         colorSpUpUI.a = alphaSpUpUI;
         speedUpUI.GetComponent<Image>().color = colorSpUpUI;

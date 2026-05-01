@@ -1,11 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CarManager : MonoBehaviour
 {
-    public GameObject carGraphics;
+    public static GameObject carGraphics;
 
-    public float speedZ = 0;
+    public float speedZ;
     public float accelZ;
     public float decelZ;
     public static int accelZAim;
@@ -21,10 +22,11 @@ public class CarManager : MonoBehaviour
     public float gravSwapCD;
     public static float gravSwapTimer = 0;
 
-    public static float health = 3;
+    public static float health = 5;
 
-    public static int thrill = 0;
+    public static int thrill = 1;
     public float minSpeedForThrill;
+    public float minThrillIncrease;
 
     bool onLeftWall = false;
     bool onRightWall = false;
@@ -38,11 +40,13 @@ public class CarManager : MonoBehaviour
 
     void Start()
     {
-
+        carGraphics = GameObject.Find("Rollcage");
     }
 
     void Update()
     {
+        if (GameManager.gameIsEnd) return;
+
         AccelInputX();
 
         if (inHitstun) return;
@@ -55,6 +59,8 @@ public class CarManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.gameIsEnd) return;
+        minSpeedForThrill += minThrillIncrease;
         if (gravSwapTimer > 0) gravSwapTimer--;
         if (hitStunTimer > 0) hitStunTimer--;
 
@@ -182,6 +188,34 @@ public class CarManager : MonoBehaviour
         {
             stunFlashTimer--;
         }
+    }
+
+    public void RestartCar()
+    {
+        Vector3 pos = this.transform.position;
+        pos = Vector3.zero;
+        pos.y += 1;
+        this.transform.position = pos;
+
+        onLeftWall = false;
+        onRightWall = false;
+
+        inHitstun = false;
+
+        speedZ = 2;
+
+        health = 3;
+
+        thrill = 1;
+
+        gravAim = -1;
+
+        gravSwapTimer = 0;
+
+        hitStunTimer = 0;
+        stunFlashTimer = 0;
+
+        minSpeedForThrill = 0.5f;
     }
 
     private void OnCollisionEnter(Collision collision)

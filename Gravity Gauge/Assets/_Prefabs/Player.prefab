@@ -57,6 +57,7 @@ MonoBehaviour:
   gravJumpForce: 20
   gravSwapCD: 70
   minSpeedForThrill: 0.5
+  minThrillIncrease: 0.001
   hitStunCD: 40
   stunFlashCD: 7
   recoilSpeed: 1
