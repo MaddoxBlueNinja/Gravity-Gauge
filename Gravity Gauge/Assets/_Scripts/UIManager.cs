@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public GameObject speedUpUI;
     public GameObject slowDownUI;
     public GameObject healthUI;
+    public GameObject thrillUI;
 
     Color colorSpUpUI;
     float alphaSpUpUI;
@@ -16,25 +17,30 @@ public class UIManager : MonoBehaviour
 
     TMPro.TextMeshProUGUI healthText;
 
+    TMPro.TextMeshProUGUI thrillText;
+
     public float alphaChangeSpeed;
 
     private void Start()
     {
         colorSpUpUI = speedUpUI.GetComponent<Image>().color;
-        colorSpUpUI.a = 100 + alphaSpUpUI;
+        colorSpUpUI.a = alphaSpUpUI;
         speedUpUI.GetComponent<Image>().color = colorSpUpUI;
 
         colorSlDoUI = slowDownUI.GetComponent<Image>().color;
-        colorSlDoUI.a = 100 + alphaSlDoUI;
+        colorSlDoUI.a = alphaSlDoUI;
         slowDownUI.GetComponent<Image>().color = colorSlDoUI;
 
         healthText = healthUI.GetComponent<TMPro.TextMeshProUGUI>();
+
+        thrillText = thrillUI.GetComponent<TMPro.TextMeshProUGUI>();
     }
     void FixedUpdate()
     {
         SpeedUpUpdate();
         SlowDownUpdate();
         HealthUpdate();
+        ThrillUpdate();
     }
 
     void SpeedUpUpdate()
@@ -91,6 +97,16 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < CarManager.health; i++)
         {
             healthText.text += "♥";
+        }
+    }
+
+    void ThrillUpdate()
+    {
+        thrillText.text = "Thrill: ";
+
+        for (int i = 0; i < CarManager.thrill; i++)
+        {
+            thrillText.text += "|";
         }
     }
 }

@@ -5,7 +5,7 @@ public class CarManager : MonoBehaviour
 {
     public GameObject carGraphics;
 
-    public static float speedZ = 0;
+    public float speedZ = 0;
     public float accelZ;
     public float decelZ;
     public static int accelZAim;
@@ -22,7 +22,8 @@ public class CarManager : MonoBehaviour
     public static float gravSwapTimer = 0;
 
     public static float health = 3;
-    public static float minSpeed = 3;
+
+    public static int thrill = 0;
 
     bool onLeftWall = false;
     bool onRightWall = false;
@@ -44,6 +45,8 @@ public class CarManager : MonoBehaviour
         AccelInputX();
 
         if (inHitstun) return;
+
+        thrill = Mathf.CeilToInt(speedZ * 5);
 
         AccelInputZ();
         GravInput();
