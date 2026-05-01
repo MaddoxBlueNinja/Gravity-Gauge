@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,5 +14,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("LOST");
         }
+    }
+
+    public static void StartWin()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

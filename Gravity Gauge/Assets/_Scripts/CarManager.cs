@@ -203,7 +203,17 @@ public class CarManager : MonoBehaviour
             return;
         }
 
-        // If Collision is NOT a Wall or Road.
+        if (collision.gameObject.tag == "Goal")
+        {
+            GameManager.StartWin();
+        }
+
+        if (collision.gameObject.tag == "Lava")
+        {
+            health = 0;
+        }
+
+        // If Collision is NOT a Wall or Road or Lava.
         if (!inHitstun)
         {
             health--;
