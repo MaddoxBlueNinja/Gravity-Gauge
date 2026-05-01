@@ -413,7 +413,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -435,7 +435,9 @@ MonoBehaviour:
   decelZ: 0.005
   accelX: 0.025
   decelX: 0.15
-  gravityCD: 3
+  gravAmount: 0
+  gravSwapCD: 0
+  gravSwapTimer: 0
   health: 3
   minSpeed: 5
 --- !u!4 &361283209
@@ -447,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 361283205}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.65, z: 14.89}
+  m_LocalPosition: {x: 0, y: 1.19, z: 14.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

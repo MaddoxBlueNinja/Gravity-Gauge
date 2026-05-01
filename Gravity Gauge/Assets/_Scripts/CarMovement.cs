@@ -13,7 +13,12 @@ public class CarMovement : MonoBehaviour
     public float decelX;
     int accelXAim;
 
-    public float gravityCD;
+    public float gravAmount;
+    public float gravJumpForce;
+    int gravAim = -1;
+    public float gravSwapCD;
+    public float gravSwapTimer;
+
     public float health;
     public float minSpeed;
 
@@ -21,17 +26,33 @@ public class CarMovement : MonoBehaviour
     bool onRightWall = false;
     void Start()
     {
-        
+        gravSwapTimer = 0;
     }
 
     void Update()
     {
         AccelInput();
+        GravInput();
     }
 
     void FixedUpdate()
     {
         SpeedUpdate();
+        GravityUpdate();
+
+        if (gravSwapTimer > 0) gravSwapTimer--;
+    }
+
+    void GravInput()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && gravSwapTimer <= 0)
+        {
+            gravSwapTimer = gravSwapCD;
+            gravAim *= -1;
+
+            Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
+            rb.linearVelocity = new Vector3(0, gravJumpForce * gravAim, 0);
+        }
     }
 
     void AccelInput()
@@ -94,6 +115,13 @@ public class CarMovement : MonoBehaviour
         this.transform.position = pos;
     }
 
+    void GravityUpdate()
+    {
+        Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
+        rb.AddForce(0, gravAmount * gravAim, 0);
+        
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Road") return;
@@ -103,12 +131,14 @@ public class CarMovement : MonoBehaviour
             speedX = 0;
             accelXAim = 0;
             onRightWall = true;
+            return;
         }
         else if (collision.gameObject.tag == "Wall Left")
         {
             speedX = 0;
             accelXAim = 0;
             onLeftWall = true;
+            return;
         }
     }
 
@@ -119,10 +149,12 @@ public class CarMovement : MonoBehaviour
         if (collision.gameObject.tag == "Wall Right")
         {
             onRightWall = false;
+            return;
         }
         else if (collision.gameObject.tag == "Wall Left")
         {
             onLeftWall = false;
+            return;
         }
     }
 }
