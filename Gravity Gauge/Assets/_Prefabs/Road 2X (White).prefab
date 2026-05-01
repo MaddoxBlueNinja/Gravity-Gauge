@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1998731216443556702}
   m_Layer: 0
   m_Name: Gap Wall 2
-  m_TagString: Road
+  m_TagString: Wall Right
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8481189803251993803}
   m_Layer: 0
   m_Name: Gap Wall 1
-  m_TagString: Road
+  m_TagString: Wall Left
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,6 +149,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7010568431075112651}
     m_Modifications:
+    - target: {fileID: 3388423877379619196, guid: c90e4fdbc9564484984b6874ea897a4f, type: 3}
+      propertyPath: m_TagString
+      value: Wall Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929694769122441118, guid: c90e4fdbc9564484984b6874ea897a4f, type: 3}
+      propertyPath: m_TagString
+      value: Wall Right
+      objectReference: {fileID: 0}
     - target: {fileID: 8166754101233521066, guid: c90e4fdbc9564484984b6874ea897a4f, type: 3}
       propertyPath: m_Name
       value: Road (White) (1)
@@ -213,11 +221,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3388423877379619196, guid: c90e4fdbc9564484984b6874ea897a4f, type: 3}
       propertyPath: m_TagString
-      value: Road
+      value: Wall Right
       objectReference: {fileID: 0}
     - target: {fileID: 3929694769122441118, guid: c90e4fdbc9564484984b6874ea897a4f, type: 3}
       propertyPath: m_TagString
-      value: Road
+      value: Wall Left
       objectReference: {fileID: 0}
     - target: {fileID: 5062910018157182200, guid: c90e4fdbc9564484984b6874ea897a4f, type: 3}
       propertyPath: m_TagString

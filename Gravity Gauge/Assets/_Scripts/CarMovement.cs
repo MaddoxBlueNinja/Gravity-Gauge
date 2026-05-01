@@ -16,6 +16,9 @@ public class CarMovement : MonoBehaviour
     public float gravityCD;
     public float health;
     public float minSpeed;
+
+    bool onLeftWall = false;
+    bool onRightWall = false;
     void Start()
     {
         
@@ -29,12 +32,6 @@ public class CarMovement : MonoBehaviour
     void FixedUpdate()
     {
         SpeedUpdate();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Road") return;
-        // Put lose conditions here.
     }
 
     void AccelInput()
@@ -52,11 +49,11 @@ public class CarMovement : MonoBehaviour
             accelZAim = 0;
         }
 
-        if (Keyboard.current.dKey.isPressed)
+        if (Keyboard.current.dKey.isPressed && !onRightWall)
         {
             accelXAim = 1;
         }
-        else if (Keyboard.current.aKey.isPressed)
+        else if (Keyboard.current.aKey.isPressed && !onLeftWall)
         {
             accelXAim = -1;
         }
@@ -95,5 +92,37 @@ public class CarMovement : MonoBehaviour
         pos.z += speedZ;
         pos.x += speedX;
         this.transform.position = pos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Road") return;
+
+        if (collision.gameObject.tag == "Wall Right")
+        {
+            speedX = 0;
+            accelXAim = 0;
+            onRightWall = true;
+        }
+        else if (collision.gameObject.tag == "Wall Left")
+        {
+            speedX = 0;
+            accelXAim = 0;
+            onLeftWall = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Road") return;
+
+        if (collision.gameObject.tag == "Wall Right")
+        {
+            onRightWall = false;
+        }
+        else if (collision.gameObject.tag == "Wall Left")
+        {
+            onLeftWall = false;
+        }
     }
 }

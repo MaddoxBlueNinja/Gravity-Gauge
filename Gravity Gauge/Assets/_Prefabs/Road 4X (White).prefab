@@ -103,6 +103,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7276358202015075145}
     m_Modifications:
+    - target: {fileID: 503070752857714144, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
+      propertyPath: m_TagString
+      value: Wall Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048159691694572369, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
+      propertyPath: m_TagString
+      value: Wall Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266516970399720194, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
+      propertyPath: m_TagString
+      value: Wall Right
+      objectReference: {fileID: 0}
     - target: {fileID: 5893130404948699730, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
       propertyPath: m_Name
       value: Road 2X (White) (1)
@@ -146,6 +158,18 @@ PrefabInstance:
     - target: {fileID: 7010568431075112651, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114080659268149913, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
+      propertyPath: m_TagString
+      value: Wall Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878081030629534843, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
+      propertyPath: m_TagString
+      value: Wall Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996297030940927603, guid: 3ac21d824d90bca4bb78f13a7683a7a3, type: 3}
+      propertyPath: m_TagString
+      value: Wall Right
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
